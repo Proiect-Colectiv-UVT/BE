@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable{
@@ -35,10 +36,8 @@ public class User implements Serializable{
     }
 
 
-
     public User() {
     }
-    
     
     
     public long getId() {

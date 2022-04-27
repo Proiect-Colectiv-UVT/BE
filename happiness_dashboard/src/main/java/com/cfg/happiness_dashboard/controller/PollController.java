@@ -6,6 +6,7 @@ import com.cfg.happiness_dashboard.entity.Poll;
 import com.cfg.happiness_dashboard.repository.PollRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,10 +23,9 @@ public class PollController {
 		return repository.findAll();
 	}
 
-	// @GetMapping("/Poll/{id}")
-	// public Poll getPollByID(@PathVariable("id") Long id)
-	// {
-
-	// 	return repository.getUserById(id);
-	// }
+	@GetMapping("/poll/{id}")
+	public Poll getPollByID(@PathVariable("id") Long id)
+	{
+		return repository.getPollById(id);
+	}
 }
