@@ -30,7 +30,7 @@ public class Poll implements Serializable{
     @Column(nullable = false)
     private Date expiryDate;
 
-    @OneToMany(targetEntity = Results.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Result.class, cascade = CascadeType.ALL)
     @JoinColumn(name="idPoll", nullable=false, referencedColumnName = "id")
     private List <Poll> pollResults;
 

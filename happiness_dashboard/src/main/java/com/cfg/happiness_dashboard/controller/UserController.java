@@ -5,6 +5,7 @@ import java.util.List;
 import com.cfg.happiness_dashboard.entity.User;
 import com.cfg.happiness_dashboard.repository.UserRepository;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,13 @@ public class UserController {
 	public User addUser(@RequestBody User user)
 	{
 		return repository.save(user);
+	}
+
+	@DeleteMapping("user/delete/{id}")
+	public String deleteUser(@PathVariable("id") Long id)
+	{
+		repository.delete(repository.getUserById(id));
+		return "Deleted successfully";
 	}
 
 }
