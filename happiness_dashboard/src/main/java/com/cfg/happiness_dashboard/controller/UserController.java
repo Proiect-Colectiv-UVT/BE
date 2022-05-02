@@ -2,6 +2,7 @@ package com.cfg.happiness_dashboard.controller;
 
 import java.util.List;
 
+import com.cfg.happiness_dashboard.entity.Poll;
 import com.cfg.happiness_dashboard.entity.User;
 import com.cfg.happiness_dashboard.repository.UserRepository;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +39,15 @@ public class UserController {
 	{
 		return repository.save(user);
 	}
+
+	@PutMapping("user/{id}/poll/add")
+	public User addPoll(@PathVariable("id") Long id, @RequestBody Poll poll)
+	{
+		User user = repository.getUserById(id);		
+		user.getPollsCreated().add(poll);
+        return repository.save(user);
+    }
+
 
 	@DeleteMapping("user/delete/{id}")
 	public String deleteUser(@PathVariable("id") Long id)

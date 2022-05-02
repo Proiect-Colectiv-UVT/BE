@@ -32,9 +32,9 @@ public class Poll implements Serializable{
 
     @OneToMany(targetEntity = Result.class, cascade = CascadeType.ALL)
     @JoinColumn(name="idPoll", nullable=false, referencedColumnName = "id")
-    private List <Poll> pollResults;
+    private List <Result> pollResults;
 
-    public Poll(long id, String title, String description, Date expiryDate, List<Poll> pollResults) {
+    public Poll(long id, String title, String description, Date expiryDate, List<Result> pollResults) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -79,19 +79,21 @@ public class Poll implements Serializable{
     }
 
 
-    public List<Poll> getPollResults() {
+    public List<Result> getPollResults() {
         return pollResults;
     }
 
 
-    public void setPollResults(List<Poll> pollResults) {
+    public void setPollResults(List<Result> pollResults) {
         this.pollResults = pollResults;
     }
 
+
     @Override
     public String toString() {
-        return "Poll [description=" + description + ", expiryDate=" + expiryDate + ", id=" + id
-                + ", title=" + title + "]";
+        return "Poll [description=" + description + ", expiryDate=" + expiryDate + ", id=" + id + ", pollResults="
+                + pollResults + ", title=" + title + "]";
     }
+
 
 }
