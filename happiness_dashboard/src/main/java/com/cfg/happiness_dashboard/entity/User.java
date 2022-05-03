@@ -21,7 +21,7 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false , updatable = false)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false)    
     private String name;
     
     @OneToMany(targetEntity = Poll.class, cascade = CascadeType.ALL)

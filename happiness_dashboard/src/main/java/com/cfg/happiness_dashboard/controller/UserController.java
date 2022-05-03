@@ -34,6 +34,12 @@ public class UserController {
 		return repository.getUserById(id);
 	}
 
+	@GetMapping("/user/login/{name}")
+	public User getUserByName(@PathVariable("name") String name)
+	{
+		return repository.getUserByName(name);
+	}
+
     @PostMapping("user/add")
 	public User addUser(@RequestBody User user)
 	{
