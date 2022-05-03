@@ -16,7 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "results")
-public class Results  implements Serializable{
+public class Result  implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,16 @@ public class Results  implements Serializable{
     @Column(nullable = false, updatable = false)
     private Date date;
     
-    public Results(int rating, String comment, Date date) {
+
+
+    public Result(long id, int rating, String comment, Date date) {
+        this.id = id;
         this.rating = rating;
         this.comment = comment;
         this.date = date;
     }
 
-    public Results() {
+    public Result() {
     }
 
     public int getRating() {
@@ -64,9 +67,17 @@ public class Results  implements Serializable{
         this.date = date;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "Results [comment=" + comment + ", date=" + date + ", rating=" + rating + "]";
+        return "Result [comment=" + comment + ", date=" + date + ", id=" + id + ", rating=" + rating + "]";
     }
     
 }
