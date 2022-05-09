@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 
 @Entity
 @Table(name = "results")
@@ -27,10 +25,8 @@ public class Result  implements Serializable{
     private int rating;
     @Column(updatable = false)
     private String comment;
-    @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Date date;
-    
 
 
     public Result(long id, int rating, String comment, Date date) {
@@ -69,10 +65,6 @@ public class Result  implements Serializable{
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override
