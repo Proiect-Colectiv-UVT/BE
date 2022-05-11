@@ -57,8 +57,9 @@ public class UserController {
 	{
 		User user = repository.getUserById(id);		
 		user.getPollsCreated().add(poll);
-        return repository.save(user);
-    }
+        
+		return repository.save(user);
+	}
 
 
 	@DeleteMapping("user/delete/{id}")

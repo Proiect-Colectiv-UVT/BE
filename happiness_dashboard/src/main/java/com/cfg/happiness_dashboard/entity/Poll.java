@@ -4,9 +4,12 @@ package com.cfg.happiness_dashboard.entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "polls")
+@Table(name = "poll")
 public class Poll implements Serializable{
 
     @Id
@@ -34,12 +37,23 @@ public class Poll implements Serializable{
     @JoinColumn(name="idPoll", nullable=false, referencedColumnName = "id")
     private List <Result> pollResults;
 
-    public Poll(long id, String title, String description, Date expiryDate, List<Result> pollResults) {
+    @ElementCollection
+    @CollectionTable(
+            name="vote",
+            joinColumns=@JoinColumn(name="idPoll")
+    )
+    @Column(name="idUser")
+    private Set<Long> VotedBy;
+
+
+    public Poll(long id, String title, String description, Date expiryDate, List<Result> pollResults,
+            Set<Long> votedBy) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.expiryDate = expiryDate;
         this.pollResults = pollResults;
+        VotedBy = votedBy;
     }
 
     
@@ -86,10 +100,25 @@ public class Poll implements Serializable{
     }
 
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public Set<Long> getVotedBy() {
+        return VotedBy;
+    }
+
+
+    public void setVotedBy(Set<Long> votedBy) {
+        VotedBy = votedBy;
+    }
+
+
     @Override
     public String toString() {
-        return "Poll [description=" + description + ", expiryDate=" + expiryDate + ", id=" + id + ", pollResults="
-                + pollResults + ", title=" + title + "]";
+        return "Poll [VotedBy=" + VotedBy + ", description=" + description + ", expiryDate=" + expiryDate + ", id=" + id
+                + ", pollResults=" + pollResults + ", title=" + title + "]";
     }
 
 
