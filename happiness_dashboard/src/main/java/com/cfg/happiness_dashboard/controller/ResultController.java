@@ -4,8 +4,9 @@ package com.cfg.happiness_dashboard.controller;
 import java.util.List;
 
 import com.cfg.happiness_dashboard.entity.Result;
-import com.cfg.happiness_dashboard.repository.ResultRepository;
+import com.cfg.happiness_dashboard.service.ResultService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,21 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResultController {
 
-    private final ResultRepository repository;
+	@Autowired
+    ResultService resultService;
 
-    public ResultController(ResultRepository repository) {
-        this.repository = repository;
-    }
 
-    @GetMapping("/results")
+    public ResultController(ResultService resultService) {
+		this.resultService = resultService;
+	}
+
+	@GetMapping("/results")
 	public List<Result> all() {
-		return repository.findAll();
+		return resultService.all();
 	}
 
     @GetMapping("/result/{id}")
-	public Result getPollByID(@PathVariable("id") Long id)
+	public Result getResultById(@PathVariable("id") Long id)
 	{
-		return repository.getResultById(id);
+		return resultService.getResultById(id);
 	}
 
 }
